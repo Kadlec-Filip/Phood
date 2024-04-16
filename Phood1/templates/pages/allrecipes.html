@@ -1,0 +1,43 @@
+{% extends 'pages/base.html' %}
+{% load static %}
+{% block content %}
+<style>
+#my_div{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+</style>
+
+
+<h1>Where recipes o.O</h1>
+
+<div class="container">
+    <div class="row">
+      <div class="col col-md-4"><a href="#"><img src="{% static 'pictures/spaghetti.jpg' %}" height="250px" width="250px" id="my_div">
+      sometext</a>
+      </div>
+      <div class="col col-md-4"><a href="#"><img src="{% static 'pictures/spaghetti.jpg' %}" height="250px" width="250px" ></a></div>
+      <div class="col col-md-4"><a href="#"><img src="{% static 'pictures/spaghetti.jpg' %}" height="250px" width="250px" ></a></div>
+
+      <div class="w-100"></div>
+      <div class="col col-md-4"><a href="#"><img src="{% static 'pictures/spaghetti.jpg' %}" height="250px" width="250px" ></a></div>
+      <div class="col col-md-4"><a href="#"><img src="{% static 'pictures/spaghetti.jpg' %}" height="250px" width="250px" ></a></div>
+      <div class="col col-md-4"><a href="#"><img src="{% static 'pictures/spaghetti.jpg' %}" height="250px" width="250px" ></a></div>
+
+      <div class="w-100"></div>
+      <div class="col col-md-4"><a href="#"><img src="{% static 'pictures/spaghetti.jpg' %}" height="250px" width="250px" ></a></div>
+      <div class="col col-md-4"><a href="#"><img src="{% static 'pictures/spaghetti.jpg' %}" height="250px" width="250px" ></a></div>
+      <div class="col col-md-4"><a href="#"><img src="{% static 'pictures/spaghetti.jpg' %}" height="250px" width="250px" ></a></div>
+
+      <div class="w-100"></div>
+      <div class="col col-md-4"><a href="#"><img src="{% static 'pictures/spaghetti.jpg' %}" height="250px" width="250px" ></a></div>
+      <div class="col col-md-4"><a href="#"><img src="{% static 'pictures/spaghetti.jpg' %}" height="250px" width="250px" ></a></div>
+      <div class="col col-md-4"><a href="#"><img src="{% static 'pictures/spaghetti.jpg' %}" height="250px" width="250px" ></a></div>
+
+    </div>
+  </div>
+
+</div>
+
+{% endblock%}

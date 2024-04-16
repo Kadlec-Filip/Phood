@@ -13,11 +13,23 @@
     #button1{
     width: 160px;
     height: 80px;
+
+    padding: 15px 45px;
+    border: 1px outset buttonborder;
+    border-radius: 5px;
+    color: white;
+    background-color: #145374;
     }
     #button2{
-        width: 160px;
-        height: 80px;
-        margin-left: 50px;
+    width: 160px;
+    height: 80px;
+    margin-left: 50px;
+
+    padding: 15px 40px;
+    border: 1px outset buttonborder;
+    border-radius: 5px;
+    color: white;
+    background-color: #145374;
     }
     #container_for_buttons{
         text-align: center;
@@ -32,8 +44,8 @@
 </div>
 
 <div id="container_for_buttons">
-    <button type="button" id="button1" >I'm hungry!</button>
-    <button type="button" id="button2">Where pigeons!</button>
+    <a href="{% url 'recipes' %}" type="btn btn-primary" id="button1" >I'm hungry!</a>
+    <a type="button" id="button2">Where pigeons!</a>
 </div>
 
 
