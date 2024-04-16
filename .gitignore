@@ -1,5 +1,5 @@
 
 djangoenv/
 
-*.pyc
+**/*.pyc
 
