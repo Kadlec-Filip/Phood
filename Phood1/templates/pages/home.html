@@ -1,0 +1,40 @@
+{% extends 'pages/base.html' %}
+{% block content %}
+<style>
+    #mainPageJumotron{
+        background-color:  #f6f5f5;
+        max-height:180px;
+        font-family: "Century Gothic";
+    }
+    #customButton{
+        background-color: #145374;
+    }
+
+    #button1{
+    width: 160px;
+    height: 80px;
+    }
+    #button2{
+        width: 160px;
+        height: 80px;
+        margin-left: 50px;
+    }
+    #container_for_buttons{
+        text-align: center;
+    }
+
+</style>
+
+
+<div class="jumbotron text-center pt-5" id="mainPageJumotron">
+  <h1>Hello, Minibiniblini!</h1>
+  <p class="lead"> Whatcha wanna eat?</p>
+</div>
+
+<div id="container_for_buttons">
+    <button type="button" id="button1" >I'm hungry!</button>
+    <button type="button" id="button2">Where pigeons!</button>
+</div>
+
+
+{% endblock%}

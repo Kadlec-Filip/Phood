@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<title>Phood</title>
+{% load static %}
+
+<!--TODO: RE-DO the css bullshit. Make css files and import them where needed.-->
+<style>
+    body {
+        margin-bottom:40px;
+        background-color: #f6f5f5;
+    }
+    footer {
+        width: 100%;
+        background-color: #145374;
+        position: fixed;
+        height: 40px;
+        bottom: 0px;
+        left: 0px;
+        right: 0px;
+        margin-bottom: 0px;
+    }
+    #footer1{
+        margin-left:2%;
+        float:left;
+
+    }
+    #footer2{
+        margin-right:2%;
+        float:right;
+    }
+    #footerText{
+        color: white;
+    }
+
+</style>
+</head>
+
+<body>
+{% include 'pages/navbar.html' %}
+{% block content %}
+    replace me
+{% endblock%}
+</body>
+
+<footer>
+<div id="footer1"><p id="footerText">Hola, am ur amazin' footer, am i not? </p></div>
+<div id="footer2"><p id="footerText"> Created by claire's hubby</p></div>
+</footer>
