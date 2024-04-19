@@ -1,10 +1,14 @@
 import csv
 import os
+from pathlib import Path
 from recipe.models import Recipe
 
+SCRIPTS_DIR = Path(__file__).resolve().parent  # get current dir
+file_path = os.path.join(SCRIPTS_DIR, 'recipes_init.csv')
+
 def run():
-    file = open('recipes_init.csv')
-    read_csv_file = csv.reader(file)
+    file = open(file_path)
+    read_csv_file = csv.reader(file, skipinitialspace=True)
     
     # Clean db
     Recipe.objects.all().delete()

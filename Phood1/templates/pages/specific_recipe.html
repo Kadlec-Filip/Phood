@@ -1,0 +1,23 @@
+{% extends 'pages/base.html' %}
+{% load static %}
+{% block content %}
+
+<h1>Recipes table</h1>
+<table>
+    <thead>
+        <tr>
+            <th>title</th>
+            <th>instructions</th>
+            <th>ingredients</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>{{ recipe.title }}</td>
+            <td>{{ recipe.instructions }}</td>
+            <td>{{ recipe.ingredients }}</td>
+        </tr>
+    </tbody>
+</table>
+
+{% endblock%}
