@@ -2,22 +2,38 @@
 {% load static %}
 {% block content %}
 
-<h1>Recipes table</h1>
-<table>
+<style>
+h1, h2, h3, p{
+    max-width: 40%;
+    margin-left: 10%;
+    margin-right: auto;
+}
+#ing_table{
+    max-width: 30%;
+    margin-right: 15%;
+    margin-left: auto;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;;
+}
+</style>
+
+<h1>{{ recipe.title }}</h1>
+<h2>Instructions</h2>
+<p>{{ recipe.instructions }}</p>
+<p></p>
+<table class="table" id="ing_table">
     <thead>
-        <tr>
-            <th>title</th>
-            <th>instructions</th>
-            <th>ingredients</th>
-        </tr>
+      <tr>
+        <th scope="col">Ingredients</th>
+        <th scope="col"></th>
+      </tr>
     </thead>
     <tbody>
-        <tr>
-            <td>{{ recipe.title }}</td>
-            <td>{{ recipe.instructions }}</td>
-            <td>{{ recipe.ingredients }}</td>
-        </tr>
+      {% for ing in ing_info %}
+      <tr>
+        <td>{{ ing.0}}</td>
+        <td width=15%>{{ ing.1}}{{ ing.2}}</td>
+      </tr>
+      {% endfor %}
     </tbody>
-</table>
-
+  </table>
 {% endblock%}
