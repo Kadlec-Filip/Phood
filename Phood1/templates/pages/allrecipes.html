@@ -7,6 +7,13 @@
   justify-content: center;
   align-items: center;
 }
+.card:hover {
+  transform: scale(1.075);
+}
+.card {
+  transition: transform 0.5s;
+  background-color: rgba(255, 235, 235, 0.904);
+}
 </style>
 
 
@@ -16,8 +23,8 @@
     <div class="row">
       {% for recipe in recipes %}
       <div class="col col-md-4">
-        <a href="{% url 'specific_recipe' recipe.id%}" style="color: #fb3f00; text-decoration: none;">
-        <div class="card shadow p-3 mb-3 bg-white rounded" style="width: 18rem;">
+        <a href="{% url 'specific_recipe' recipe.id%}" style="color: rgb(252, 110, 110); text-decoration: none;">
+        <div class="card shadow-lg p-3 mb-3 rounded" style="width: 18rem;">
           <img src="{% static 'pictures/spaghetti.jpg' %}" class="card-img-top" alt="oh no...">
           <div class="card-body">
             <p class="card-text">{{ recipe.title }}</p>
