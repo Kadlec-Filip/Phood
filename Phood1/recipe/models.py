@@ -1,8 +1,8 @@
 from django.db import models
  
 class Recipe(models.Model):
+    # TODO: Add Time, Complexity of a recipe
     title           = models.CharField(max_length=100, null=False)
-    instructions    = models.TextField(default='')
     picture         = models.CharField(default='')  # path to pic
 
     def __str__(self):
@@ -31,3 +31,8 @@ class RecipeIngredients(models.Model):
 
     def __str__(self):
         return f"{self.ingredient_id.name} from{self.recipe_id.title}"
+    
+class Instructions(models.Model):
+    rec_id          = models.ForeignKey(Recipe, related_name="rec_id", on_delete=models.CASCADE)
+    step_number      = models.IntegerField(default=0)
+    step_instruction= models.CharField(max_length=120)

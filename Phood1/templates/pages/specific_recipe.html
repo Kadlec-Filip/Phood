@@ -12,23 +12,31 @@ h1, h2, h3, p{
     margin-top: 3%;
     margin-left: 15%;
     margin-right: 10%;
+}
+
+#recipe_container_inner{
     background-color: rgb(255, 235, 235);
     box-shadow: rgba(149, 157, 165, 0.5) 0px 8px 24px;;
 }
+
+.top-buffer { margin-top:20px; }
 </style>
 
 
 <div class="container" id="recipe_container">
-    <div class="row">
-    <div class="column" style="width: 35%;">
-      <div class="col" style="font-size: xx-large;">{{ recipe.title }}</div>
+  <div class="row"><div class="col" style="font-size: xxx-large;">{{ recipe.title }}</div></div>
+  <div class="row top-buffer">
+    <div class="column" style="width: 45%;" id="recipe_container_inner">
       <div class="w-100"></div>
       <div class="col" style="font-size: x-large;">Instructions</div>
       <div class="w-100"></div>
-      <div class="col">{{ recipe.instructions }}</div>
+      {% for step in recipe_steps %}
+      <div class="col">{{ step.step_number }} - {{ step.step_instruction }}</div>
+      <div class="w-100"></div>
+      {% endfor %}
     </div>
 
-    <div class="column" style="margin-right: 5%; margin-left: auto; margin-top: 40px; width: 35%;">
+    <div class="column" style="margin-right: 5%; margin-left: auto; width: 45%;" id="recipe_container_inner">
       <table class="table" id="ing_table">
         <thead>
           <tr>
