@@ -23,7 +23,7 @@
     <div class="row">
       {% for recipe in recipes %}
       <div class="col col-md-4">
-        <a href="{% url 'specific_recipe' recipe.id%}" style="color: rgb(252, 110, 110); text-decoration: none;">
+        <a href="{% url 'specific_recipe' recipe_id=recipe.id%}" style="color: rgb(252, 110, 110); text-decoration: none;">
         <div class="card shadow-lg p-3 mb-3 rounded" style="width: 18rem;">
           <img src="{% static 'pictures/spaghetti.jpg' %}" class="card-img-top" alt="oh no...">
           <div class="card-body">

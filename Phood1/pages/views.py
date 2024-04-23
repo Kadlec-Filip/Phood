@@ -22,9 +22,14 @@ def specific_recipe_view(request, recipe_id, *args, **kwargs):
     context['recipe_steps'] = Instructions.objects.filter(rec_id=recipe_id).order_by('step_number')
     return render(request, "pages/specific_recipe.html", context)
 
-def allrecipes_view(request, *args, **kwargs):
+def allrecipes_view(request, ingredient, *args, **kwargs):
     context = {}
-    recipes = Recipe.objects.all()
-    context['recipes'] = recipes
+    # recipes = Recipe.objects.all()
+    # recipes = Recipe.objects.filter(recipe__ingredient__name__iexact="pasta")
+    pasta_recipes = []
+    recipe_ingredient_with_pasta = RecipeIngredients.objects.filter(ingredient_id__name__icontains=ingredient)
+    for recing_pasta in recipe_ingredient_with_pasta:
+        pasta_recipes.append(Recipe.objects.get(pk=recing_pasta.recipe_id.pk))
+    context['recipes'] = pasta_recipes
 
     return render(request, "pages/allrecipes.html", context)

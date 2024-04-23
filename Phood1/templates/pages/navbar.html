@@ -44,9 +44,9 @@
                 Category
             </a>
             <div class="dropdown-menu sm-menu" id="dropdownMenu1">
-              <a class="dropdown-item" id="navbarText" href="#">Pasta</a>
-              <a class="dropdown-item" id="navbarText" href="#">Veggies</a>
-              <a class="dropdown-item" id="navbarText" href="#">Bloodbath</a>
+              <a class="dropdown-item" id="navbarText" href="{% url 'recipes' ingredient='pasta'%}">Pasta</a>
+              <a class="dropdown-item" id="navbarText" href="">Veggies</a>
+              <a class="dropdown-item" id="navbarText" href="{% url 'recipes' ingredient='beef'%}">Bloodbath</a>
             </div>
           </li>
           <li class="nav-item">

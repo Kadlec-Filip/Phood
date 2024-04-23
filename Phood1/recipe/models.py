@@ -30,7 +30,7 @@ class RecipeIngredients(models.Model):
     unit            = models.CharField(null=False, choices=CATEGORY_UNIT, default=None)
 
     def __str__(self):
-        return f"{self.ingredient_id.name} from{self.recipe_id.title}"
+        return f"{self.ingredient_id.name} from {self.recipe_id.title}"
     
 class Instructions(models.Model):
     rec_id          = models.ForeignKey(Recipe, related_name="rec_id", on_delete=models.CASCADE)

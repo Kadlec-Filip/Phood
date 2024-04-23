@@ -21,7 +21,7 @@ from pages.views import homepage_view, allrecipes_view, specific_recipe_view
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',homepage_view, name='home'),
-    path('recipes/', allrecipes_view, name='recipes'),
+    path('recipes/<str:ingredient>', allrecipes_view, name='recipes'),
     path('spec_rec/<int:recipe_id>', specific_recipe_view, name='specific_recipe'),
 
 ]
