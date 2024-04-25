@@ -25,20 +25,20 @@ def run():
     Ingredient.objects.all().delete()
     Instructions.objects.all().delete()
     
-    # --- START --- Generate Carbonara recipe to DB
-    for recipe in rec_csv_file:
-        carbonara = Recipe.objects.create(title=recipe[0], picture=recipe[1])
+    # # --- START --- Generate Carbonara recipe to DB
+    # for recipe in rec_csv_file:
+    #     carbonara = Recipe.objects.create(title=recipe[0], picture=recipe[1])
     
-    list_of_ings = []
-    for ingredient in ing_csv_file:
-        i = Ingredient.objects.create(name=ingredient[0])
-        list_of_ings.append(i)
+    # list_of_ings = []
+    # for ingredient in ing_csv_file:
+    #     i = Ingredient.objects.create(name=ingredient[0])
+    #     list_of_ings.append(i)
 
-    counter = 0
-    for recing in recing_csv_file:
-        RecipeIngredients.objects.create(recipe_id=carbonara, ingredient_id=list_of_ings[counter], qty=recing[2], unit=recing[3])
-        counter+=1
+    # counter = 0
+    # for recing in recing_csv_file:
+    #     RecipeIngredients.objects.create(recipe_id=carbonara, ingredient_id=list_of_ings[counter], qty=recing[2], unit=recing[3])
+    #     counter+=1
 
-    for recing in instr_csv_file:
-        Instructions.objects.create(rec_id=carbonara, step_number=recing[1], step_instruction=recing[2])
-    # --- END --- Generate Carbonara recipe to DB
+    # for recing in instr_csv_file:
+    #     Instructions.objects.create(rec_id=carbonara, step_number=recing[1], step_instruction=recing[2])
+    # # --- END --- Generate Carbonara recipe to DB

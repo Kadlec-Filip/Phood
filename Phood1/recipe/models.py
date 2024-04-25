@@ -1,9 +1,17 @@
 from django.db import models
  
 class Recipe(models.Model):
-    # TODO: Add Time, Complexity of a recipe
+    CATEGORY_CUISINE = (
+        ('Italian', 'Italian'),
+        ('French', 'French'),
+        ('Asian', 'Asian'),
+        ('Indian', 'Indian'),
+        ('Czech', 'Czech'),
+        ('', ''),
+    )
     title           = models.CharField(max_length=100, null=False)
-    picture         = models.CharField(default='')  # path to pic
+    cuisine         = models.CharField(choices=CATEGORY_CUISINE, default=None)
+    time            = models.IntegerField()
 
     def __str__(self):
         return self.title

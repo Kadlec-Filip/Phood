@@ -1,6 +1,7 @@
-from django.shortcuts import render
-from django.http import HttpResponse
+from django.shortcuts import render, redirect
+from django.http import HttpResponse, HttpResponseRedirect
 from recipe.models import Recipe, RecipeIngredients, Ingredient, Instructions
+from Forms.forms import RecipeForm
 
 def homepage_view(request, *args, **kwargs):
     return render(request, "pages/home.html", {})
@@ -33,3 +34,28 @@ def allrecipes_view(request, ingredient, *args, **kwargs):
     context['recipes'] = pasta_recipes
 
     return render(request, "pages/allrecipes.html", context)
+
+def add_recipe_view(request, *args, **kwargs):
+    form = RecipeForm()
+    if request.method == "POST":
+        form = RecipeForm(request.POST)
+        if form.is_valid():
+            print(form.cleaned_data)
+            # 1) create Recipe
+            # recipe_obj = Recipe.objects.create(title=form.cleaned_data['title'], cuisine=form.cleaned_data['cuisine'], time=picture=form.cleaned_data['time'])
+            # 2) create all Ingredients
+             # for ingredient in ing_csv_file:
+            #     i = Ingredient.objects.create(name=form.cleaned_data['ingredient'])
+            #     list_of_ings.append(i)
+            # 3) create RecipeIngredients
+            # for recing in instr_csv_file:
+            #     RecipeIngredient.objects.create(rec_id=recipe_obj, ingredient_id=list_of_ings[counter], qty=form.cleaned_data['ing_qty'], unit=form.cleaned_data['ing_unit'])
+            
+
+            return redirect(homepage_view)
+        else:
+            # print(form.errors())
+            form = RecipeForm()
+    
+    context = {'form': form}
+    return render(request, 'pages/add_recipe.html', context)
