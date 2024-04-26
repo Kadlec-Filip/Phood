@@ -1,7 +1,7 @@
 # from django.contrib.auth.forms import UserCreationForm
 # from django.contrib.auth.models import User
 
-from recipe.models import Recipe
+from recipe.models import Recipe, RecipeIngredients, Ingredient
 from django import forms
 
 # Comfy idea if you're writing to one Model, but Im saving to three
@@ -30,6 +30,9 @@ class RecipeForm(forms.Form):
     cuisine     = forms.ChoiceField(choices=CATEGORY_CUISINE)
     time        = forms.IntegerField()
     # picture     = CharField()
-    ingredient  = forms.CharField()
     ing_qty     = forms.FloatField()
     ing_unit    = forms.ChoiceField(choices=CATEGORY_UNIT)
+
+IngredientFormSet = forms.modelformset_factory(
+    Ingredient, fields=('name',), extra=1
+)

@@ -5,14 +5,7 @@
 
 
 </style>
-<h1>some header</h1><br>
-<form action="{% url 'add_recipe' form1_done=1%}" method="post">
-  {% csrf_token %}
-  {{ form_recipe }}
-  <input type="submit" value="OK">
-</form>
 
-{% if form1_done %}
 <h1>Add ingredients</h1>
 <form id="form-container" method="POST">
     {% csrf_token %}
@@ -25,7 +18,7 @@
     <button id="add-form" type="button">Add Another Ingredient</button>
     <button type="submit">Create ingredients</button>
 </form>
-{% endif %}
+
 
 <script>
     let birdForm = document.querySelectorAll(".ing-form")
@@ -49,4 +42,6 @@
         totalForms.setAttribute('value', `${formNum+1}`)
     }
 </script>
+</body>
+
 {% endblock%}
