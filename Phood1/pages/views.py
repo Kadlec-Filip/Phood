@@ -38,7 +38,7 @@ def allrecipes_view(request, ingredient, *args, **kwargs):
 def add_recipe_view(request, form1_done, *args, **kwargs):
     context = {}
     form_recipe = RecipeForm()
-    formset=IngredientFormSet(queryset=Ingredient.objects.none())
+    formset=IngredientFormSet()
 
     if form1_done and add_recipe_view.form1counter < 1:
         if request.method == "POST":

@@ -11,13 +11,6 @@ from django import forms
 #         fields = ['title', 'picture']
 
 class RecipeForm(forms.Form):
-    CATEGORY_UNIT = (
-        ('kg', 'kg'),
-        ('g', 'g'),
-        ('l', 'l'),
-        ('tsp', 'tsp'),
-        ('tbsp', 'tbsp'),
-    )
     CATEGORY_CUISINE = (
         ('Italian', 'Italian'),
         ('French', 'French'),
@@ -29,10 +22,21 @@ class RecipeForm(forms.Form):
     title       = forms.CharField()
     cuisine     = forms.ChoiceField(choices=CATEGORY_CUISINE)
     time        = forms.IntegerField()
-    # picture     = CharField()
+
+class IngredientForm(forms.Form):
+    CATEGORY_UNIT = (
+        ('kg', 'kg'),
+        ('g', 'g'),
+        ('l', 'l'),
+        ('tsp', 'tsp'),
+        ('tbsp', 'tbsp'),
+    )
+    name        = forms.CharField()
     ing_qty     = forms.FloatField()
     ing_unit    = forms.ChoiceField(choices=CATEGORY_UNIT)
 
-IngredientFormSet = forms.modelformset_factory(
-    Ingredient, fields=('name',), extra=1
-)
+IngredientFormSet = forms.formset_factory(IngredientForm, extra=1)
+
+# IngredientFormSet = forms.modelformset_factory(
+#     Ingredient, fields=('name',), extra=1
+# )
