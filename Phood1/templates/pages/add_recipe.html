@@ -1,31 +1,62 @@
 {% extends 'pages/base.html' %}
 {% load static %}
+{% load crispy_forms_tags %}
 {% block content %}
 <style>
-
+    #form_container{
+        margin-left: 5%;
+        margin-top: 20px;
+        width: 90%;
+    }
+    #recipe_form{
+        width:50%;
+    }
+    .subBtn{
+    margin-left: 25%;
+    border: 1px outset buttonborder;
+    border-radius: 5px;
+    color: white;
+    background-color: #1d709c;
+    }
 
 </style>
-<h1>some header</h1><br>
-<form action="{% url 'add_recipe' form1_done=1%}" method="post">
-  {% csrf_token %}
-  {{ form_recipe }}
-  <input type="submit" value="OK">
-</form>
-
-{% if form1_done %}
-<h1>Add ingredients</h1>
-<form id="form-container" method="POST">
-    {% csrf_token %}
-    {{formset.management_form}}
-    {% for form in formset %}
-    <div class="ing-form">
-    {{form}}
+<div class="container" id="form_container">
+    <div class="row">
+      <div class="col col-lg-6">
+        <form action="{% url 'add_recipe' form1_done=1%}" method="post" id="recipe_form">
+            {% csrf_token %}
+            <!-- {{ form_recipe|crispy }} -->
+              <div class="form-row ">
+                  <div class="form-group col-md-12">
+                      {{form_recipe.title|as_crispy_field}}
+                      {{form_recipe.cuisine|as_crispy_field}}
+                      {{form_recipe.time|as_crispy_field}}
+                      {{form_recipe.instructions|as_crispy_field}}
+                  </div>
+              </div>
+            <button type="submit" class='btn btn-primary' id="subBtn">Let's fill ingredients</button>
+            {{ form.errors }}
+          </form>
+        </div>
+      <div class="col col-lg-6">
+        {% if form1_done %}
+        <h1>Add ingredients</h1>
+        <form id="form-container" method="POST" id="recipe_form">
+            {% csrf_token %}
+            {{formset.management_form|crispy}}
+            {% for form in formset %}
+            <div class="ing-form">
+            {{form|crispy}}
+            </div>
+            {% endfor %}
+            <button id="add-form" class='btn btn-primary'>Add Another Ingredient</button>
+            <button type="submit" class='btn btn-primary'>Create ingredients</button>
+        </form>
+        {% endif %}
     </div>
-    {% endfor %}
-    <button id="add-form" type="button">Add Another Ingredient</button>
-    <button type="submit">Create ingredients</button>
-</form>
-{% endif %}
+  </div>
+</div>
+
 
 <script>
     let birdForm = document.querySelectorAll(".ing-form")

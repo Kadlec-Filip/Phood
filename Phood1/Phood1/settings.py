@@ -40,9 +40,14 @@ INSTALLED_APPS = [
 
     # third party stuff
     'django_extensions',
+    'bootstrap4',
+    'crispy_forms',
+    'crispy_bootstrap4',
     # my apps
     'recipe',
 ]
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
