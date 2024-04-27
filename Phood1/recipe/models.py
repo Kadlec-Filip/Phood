@@ -11,7 +11,8 @@ class Recipe(models.Model):
     )
     title           = models.CharField(max_length=100, null=False)
     cuisine         = models.CharField(choices=CATEGORY_CUISINE, default=None)
-    time            = models.IntegerField()
+    time            = models.PositiveIntegerField()
+    instructions    = models.TextField(default="")
 
     def __str__(self):
         return self.title
@@ -39,8 +40,3 @@ class RecipeIngredients(models.Model):
 
     def __str__(self):
         return f"{self.ingredient_id.name} from {self.recipe_id.title}"
-    
-class Instructions(models.Model):
-    rec_id          = models.ForeignKey(Recipe, related_name="rec_id", on_delete=models.CASCADE)
-    step_number      = models.IntegerField(default=0)
-    step_instruction= models.CharField(max_length=120)

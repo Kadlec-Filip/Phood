@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
-from recipe.models import Recipe, RecipeIngredients, Ingredient, Instructions
+from recipe.models import Recipe, RecipeIngredients, Ingredient
 from Forms.forms import RecipeForm, IngredientFormSet
 
 def homepage_view(request, *args, **kwargs):
@@ -19,8 +19,8 @@ def specific_recipe_view(request, recipe_id, *args, **kwargs):
         ingredients_info.append([Ingredient.objects.get(name=ing.ingredient_id).name, ing.qty, ing.unit])
     context['ing_info'] = ingredients_info
 
-    # Get all steps increasing order
-    context['recipe_steps'] = Instructions.objects.filter(rec_id=recipe_id).order_by('step_number')
+    # # Get all steps increasing order
+    # context['recipe_steps'] = Instructions.objects.filter(rec_id=recipe_id).order_by('step_number')
     return render(request, "pages/specific_recipe.html", context)
 
 def allrecipes_view(request, ingredient, *args, **kwargs):
@@ -39,24 +39,14 @@ def add_recipe_view(request, form1_done, *args, **kwargs):
     context = {}
     form_recipe = RecipeForm()
     formset=IngredientFormSet()
-
+    
     if form1_done and add_recipe_view.form1counter < 1:
         if request.method == "POST":
             form_recipe = RecipeForm(request.POST)
             if form_recipe.is_valid():
                 add_recipe_view.form1counter += 1
-                print(form_recipe.cleaned_data)
-                # 1) create Recipe
-                # recipe_obj = Recipe.objects.create(title=form_recipe.cleaned_data['title'], cuisine=form_recipe.cleaned_data['cuisine'], time=picture=form_recipe.cleaned_data['time'])
-                # 2) create all Ingredients
-                # for ingredient in ing_csv_file:
-                #     i = Ingredient.objects.create(name=form_recipe.cleaned_data['ingredient'])
-                #     list_of_ings.append(i)
-                # 3) create RecipeIngredients
-                # for recing in instr_csv_file:
-                #     RecipeIngredient.objects.create(rec_id=recipe_obj, ingredient_id=list_of_ings[counter], qty=form_recipe.cleaned_data['ing_qty'], unit=form_recipe.cleaned_data['ing_unit'])
-                
-
+                #print(form_recipe.cleaned_data)
+                request.session['form1_cleaned_data'] = form_recipe.cleaned_data
             else:
                 # print(form_recipe.errors())
                 form_recipe = RecipeForm()
@@ -65,8 +55,26 @@ def add_recipe_view(request, form1_done, *args, **kwargs):
         if request.method == "POST":
             formset = IngredientFormSet(request.POST)
             if formset.is_valid():
-                for ing in formset:
-                    print(ing.cleaned_data)
+                add_recipe_view.form1counter -= 1
+                print(formset.cleaned_data)
+                #####################################
+                # 1) create Recipe
+                recipe_obj = Recipe.objects.create(title=request.session.get('form1_cleaned_data')['title'], cuisine=request.session.get('form1_cleaned_data')['cuisine'], time=request.session.get('form1_cleaned_data')['time'], instructions=request.session.get('form1_cleaned_data')['instructions'])
+                # 2) create all Ingredients
+                list_of_ingredients = []
+                for ingredient in formset:
+                    if Ingredient.objects.filter(name=ingredient.cleaned_data['name']).exists():
+                        list_of_ingredients.append(Ingredient.objects.get(name=ingredient.cleaned_data['name']))
+                    else:
+                        ingredient = Ingredient.objects.create(name=ingredient.cleaned_data['name'])
+                        list_of_ingredients.append(ingredient)
+                    
+                
+                # 3) create RecipeIngredients
+                for idx, recing in enumerate(formset):
+                    RecipeIngredients.objects.create(recipe_id=recipe_obj, ingredient_id=list_of_ingredients[idx], qty=recing.cleaned_data['ing_qty'], unit=recing.cleaned_data['ing_unit'])
+                
+                #####################################
                 return redirect(homepage_view)
         else:
             formset = IngredientFormSet()

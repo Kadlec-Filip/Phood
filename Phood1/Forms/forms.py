@@ -22,6 +22,7 @@ class RecipeForm(forms.Form):
     title       = forms.CharField()
     cuisine     = forms.ChoiceField(choices=CATEGORY_CUISINE)
     time        = forms.IntegerField()
+    instructions= forms.CharField(widget=forms.Textarea)
 
 class IngredientForm(forms.Form):
     CATEGORY_UNIT = (

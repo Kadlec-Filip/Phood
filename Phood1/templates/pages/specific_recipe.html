@@ -30,10 +30,8 @@ h1, h2, h3, p{
       <div class="w-100"></div>
       <div class="col" style="font-size: x-large;">Instructions</div>
       <div class="w-100"></div>
-      {% for step in recipe_steps %}
-      <div class="col">{{ step.step_number }} - {{ step.step_instruction }}</div>
+      <div class="col">{{ recipe.instructions }}</div>
       <div class="w-100"></div>
-      {% endfor %}
     </div>
 
     <div class="column" style="margin-right: 5%; margin-left: auto; width: 45%;" id="recipe_container_inner">
