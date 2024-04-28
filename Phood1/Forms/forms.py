@@ -32,11 +32,11 @@ class IngredientForm(forms.Form):
         ('tsp', 'tsp'),
         ('tbsp', 'tbsp'),
     )
-    name        = forms.CharField()
-    ing_qty     = forms.FloatField()
-    ing_unit    = forms.ChoiceField(choices=CATEGORY_UNIT)
+    name        = forms.CharField(label='', widget=forms.TextInput({"placeholder": "ingredient"}))
+    ing_qty     = forms.FloatField(label='', widget=forms.TextInput({"placeholder": "quantity"}))
+    ing_unit    = forms.ChoiceField(label='', choices=CATEGORY_UNIT)
 
-IngredientFormSet = forms.formset_factory(IngredientForm, extra=1)
+IngredientFormSet = forms.formset_factory(IngredientForm, extra=1,)
 
 # IngredientFormSet = forms.modelformset_factory(
 #     Ingredient, fields=('name',), extra=1

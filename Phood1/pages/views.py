@@ -49,6 +49,7 @@ def add_recipe_view(request, form1_done, *args, **kwargs):
                 request.session['form1_cleaned_data'] = form_recipe.cleaned_data
             else:
                 # print(form_recipe.errors())
+                add_recipe_view.form1counter = 0
                 form_recipe = RecipeForm()
     
     else:

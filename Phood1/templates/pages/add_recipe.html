@@ -5,24 +5,32 @@
 <style>
     #form_container{
         margin-left: 5%;
+        margin-right: 5%;
         margin-top: 20px;
-        width: 90%;
     }
-    #recipe_form{
-        width:50%;
+    #inner_container_addrecipe{
+    max-width: 45%;
+    background-color: rgb(255, 235, 235);
+    box-shadow: rgba(149, 157, 165, 0.5) 0px 8px 24px;;
     }
-    .subBtn{
-    margin-left: 25%;
+    #subBtn, #add-form{
+    margin-left: 2%;
     border: 1px outset buttonborder;
     border-radius: 5px;
     color: white;
     background-color: #1d709c;
     }
+    #subBtn_red{
+    border: 1px outset buttonborder;
+    border-radius: 5px;
+    color: white;
+    background-color: #e6467b;
+    }
 
 </style>
-<div class="container" id="form_container">
+<div class="container-fluid" id="form_container">
     <div class="row">
-      <div class="col col-lg-6">
+      <div class="col" id="inner_container_addrecipe">
         <form action="{% url 'add_recipe' form1_done=1%}" method="post" id="recipe_form">
             {% csrf_token %}
             <!-- {{ form_recipe|crispy }} -->
@@ -34,23 +42,23 @@
                       {{form_recipe.instructions|as_crispy_field}}
                   </div>
               </div>
-            <button type="submit" class='btn btn-primary' id="subBtn">Let's fill ingredients</button>
+            <button type="submit" class='btn btn-primary' id="subBtn" style="margin-bottom: 10px;">Let's fill ingredients</button>
             {{ form.errors }}
           </form>
         </div>
-      <div class="col col-lg-6">
-        {% if form1_done %}
-        <h1>Add ingredients</h1>
+      {% if form1_done %}
+      <div class="col" id="inner_container_addrecipe" style="margin-left: 5%; margin-right: auto">
         <form id="form-container" method="POST" id="recipe_form">
+          <p></p>
             {% csrf_token %}
             {{formset.management_form|crispy}}
             {% for form in formset %}
-            <div class="ing-form">
+            <div class="ing-form form-row">
             {{form|crispy}}
             </div>
             {% endfor %}
-            <button id="add-form" class='btn btn-primary'>Add Another Ingredient</button>
-            <button type="submit" class='btn btn-primary'>Create ingredients</button>
+            <button id="add-form" class='btn btn-primary'>Add Ingredient</button>
+            <button type="submit" class='btn btn-primary' id="subBtn_red">CREATE RECIPE !</button>
         </form>
         {% endif %}
     </div>
