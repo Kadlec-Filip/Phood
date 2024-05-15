@@ -10,7 +10,11 @@ from django import forms
 #         model = Recipe
 #         fields = ['title', 'picture']
 
-class RecipeForm(forms.Form):
+class RecipeForm(forms.ModelForm):
+    class Meta:
+        model=Recipe
+        fields = ['title', 'cuisine', 'time', 'instructions']
+
     CATEGORY_CUISINE = (
         ('Italian', 'Italian'),
         ('French', 'French'),
@@ -25,6 +29,10 @@ class RecipeForm(forms.Form):
     instructions= forms.CharField(widget=forms.Textarea)
 
 class IngredientForm(forms.Form):
+    class Meta:
+        model=Ingredient
+        fields = ['name', 'ing_qty', 'ing_unit']
+        
     CATEGORY_UNIT = (
         ('kg', 'kg'),
         ('g', 'g'),

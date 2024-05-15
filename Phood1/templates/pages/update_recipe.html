@@ -1,0 +1,47 @@
+{% extends 'pages/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+<style>
+    #form_container{
+        margin-left: 5%;
+        margin-right: 5%;
+        margin-top: 20px;
+        margin-bottom: 100px;
+    }
+    #inner_container_addrecipe{
+    max-width: 45%;
+    background-color: rgb(255, 235, 235);
+    box-shadow: rgba(149, 157, 165, 0.5) 0px 8px 24px;;
+    }
+    #subUpdateBtn{
+    margin-left: 2%;
+    border: 1px outset buttonborder;
+    border-radius: 5px;
+    color: white;
+    background-color: #1d709c;
+    }
+</style>
+
+<div class="container-fluid" id="form_container">
+    <div class="row">
+      <div class="col" id="inner_container_addrecipe">
+        <form method="post" id="recipe_form">
+            {% csrf_token %}
+            <!-- {{ form_recipe|crispy }} -->
+              <div class="form-row ">
+                  <div class="form-group col-md-12">
+                      {{form_recipe.title|as_crispy_field}}
+                      {{form_recipe.cuisine|as_crispy_field}}
+                      {{form_recipe.time|as_crispy_field}}
+                      {{form_recipe.instructions|as_crispy_field}}
+                  </div>
+              </div>
+            <button type="submit" class='btn btn-primary' id="subUpdateBtn" style="margin-bottom: 10px;">Save changes!</button>
+            {{ form.errors }}
+          </form>
+    </div>
+  </div>
+</div>
+
+{% endblock%}

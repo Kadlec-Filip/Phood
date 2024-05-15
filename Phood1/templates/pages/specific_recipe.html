@@ -24,7 +24,9 @@ h1, h2, h3, p{
 
 
 <div class="container" id="recipe_container">
-  <div class="row"><div class="col" style="font-size: xxx-large;">{{ recipe.title }}</div></div>
+  <div class="row"><div class="col" style="font-size: xxx-large;">{{ recipe.title }}</div>
+    <div class="col"><a href="{% url 'update_recipe' recipe_id=recipe.id %}" type="btn btn-primary" id="update-recipe-btn">Update!</a></div>
+  </div>
   <div class="row top-buffer">
     <div class="column" style="width: 45%;" id="recipe_container_inner">
       <div class="w-100"></div>

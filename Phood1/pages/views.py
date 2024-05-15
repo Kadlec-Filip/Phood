@@ -44,7 +44,7 @@ def add_recipe_view(request, form1_done, *args, **kwargs):
         if request.method == "POST":
             form_recipe = RecipeForm(request.POST)
             if form_recipe.is_valid():
-                add_recipe_view.form1counter += 1
+                add_recipe_view.form1counter = 1
                 #print(form_recipe.cleaned_data)
                 request.session['form1_cleaned_data'] = form_recipe.cleaned_data
             else:
@@ -56,7 +56,7 @@ def add_recipe_view(request, form1_done, *args, **kwargs):
         if request.method == "POST":
             formset = IngredientFormSet(request.POST)
             if formset.is_valid():
-                add_recipe_view.form1counter -= 1
+                add_recipe_view.form1counter = 0
                 print(formset.cleaned_data)
                 #####################################
                 # 1) create Recipe
@@ -78,6 +78,7 @@ def add_recipe_view(request, form1_done, *args, **kwargs):
                 #####################################
                 return redirect(homepage_view)
         else:
+            add_recipe_view.form1counter = 0
             formset = IngredientFormSet()
     
 
@@ -100,3 +101,29 @@ def ing_fset_view(request, *args, **kwargs):
     
     context['formset']=formset
     return render(request, 'pages/ingredient_formset.html', context)
+
+
+def update_recipe_view(request, recipe_id, *args, **kwargs):
+    context = {}
+    recipe  = Recipe.objects.get(pk=recipe_id)
+    form_recipe = RecipeForm(instance=recipe)
+    if request.method == "POST":
+        form_recipe = RecipeForm(request.POST)
+        if form_recipe.is_valid():
+            form_recipe.save()
+            # needed?
+            # recipe.title = form_recipe.cleaned_data['title']
+            # recipe.cuisine = form_recipe.cleaned_data['cuisine']
+            # recipe.time = form_recipe.cleaned_data['time']
+            # recipe.instructions = form_recipe.cleaned_data['instructions']
+            # recipe.save()
+            # 2) delete previous recipe ?
+            # 3) copy ingredients as well! 
+
+            return redirect(homepage_view)
+        else:
+            # print(form_recipe.errors())
+            add_recipe_view.form1counter = 0
+            form_recipe = RecipeForm()
+    context['form_recipe']=form_recipe
+    return render(request, 'pages/update_recipe.html', context)
